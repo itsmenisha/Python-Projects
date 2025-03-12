@@ -2,6 +2,8 @@
 
 This is a weather app I created using Tkinter. It is one of the first projects of this beginner journey I am on. Maybe it's not much, but I learned about how weather APIs work. Along the way, I faced many challenges, but it was a fruitful experience.
 
+To make it fun, I designed the weather app with a **Howl's Moving Castle** theme to keep myself motivated. I used **Canva** to edit the background and enhance the overall aesthetic.
+
 The new things I learned were PIL and how it works, as well as how APIs function. Additionally, I gained more knowledge about handling `.env` files for storing sensitive information and working with fonts in a GUI application.
 
 ## Installation & Setup
@@ -18,4 +20,3 @@ The new things I learned were PIL and how it works, as well as how APIs function
    ```
    This also includes the requirements to handle photos and APIs.
 5. Run the application by clicking on the `.py` file.
-
