@@ -21,5 +21,5 @@ The new things I learned were PIL and how it works, as well as how APIs function
    This also includes the requirements to handle photos and APIs.
 5. Run the application by clicking on the `.py` file.
 
-# I used this video as refrence 
+### I used this video as refrence 
 https://www.youtube.com/watch?v=NCCYWIzN6hU&list=PPSV&ab_channel=ParvatComputerTechnology
