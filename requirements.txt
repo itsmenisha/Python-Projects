@@ -1,0 +1,7 @@
+tk  
+geopy  
+timezonefinder  
+requests  
+pytz  
+pillow  
+python-dotenv  
