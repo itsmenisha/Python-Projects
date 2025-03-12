@@ -6,7 +6,6 @@ from datetime import datetime
 import requests
 import pytz
 from PIL import Image, ImageTk
-import os
 from dotenv import load_dotenv
 import os
 
@@ -26,10 +25,9 @@ root.resizable(False, False)
 
 def getWeather():
     la.destroy()
-    la1.destroy()  # This deletes the label from the window
+    la1.destroy()  
     la2.destroy()  # This deletes the label from the window
 
-    global path
     city = text.get()
 
     geolocator = Nominatim(user_agent="Agent location")
@@ -102,6 +100,7 @@ def getWeather():
     b.config(text=(humidity))
     c.config(text=(description))
     d.config(text=(pressure))
+    # end of function
 
 
 # Load and resize the background image
