@@ -1,29 +1,54 @@
-# ChatBot
+# Django To-Do List
 
-A simple command-line chatbot powered by **OpenAI's GPT-3.5-turbo**. This chatbot interacts with users and generates responses using OpenAI's API.  
+A simple **To-Do List** application built using **Django**. This project helped me gain a deeper understanding of **Python**, Django's **frontend-backend connection**, and how web applications work. It was an **amazing and interactive** learning experience! I learned how to manage databases efficiently, structure a Django project properly, and handle both frontend and backend seamlessly. 
 
 ## Features  
-- Uses **GPT-3.5-turbo** for AI-powered responses.  
-- Secure API key handling via **`.env` file**.  
-- Simple command-line interface that runs in a loop until exit commands are given.  
+- **Create, Read, Update, and Delete (CRUD) tasks** for daily task management.  
+- **User authentication** to keep tasks private and secure.  
+- **Django's templating system** for a clean and responsive UI.  
+- **Database integration** using Django's ORM.  
 
 ## Installation & Setup  
 
-### 1. Download the files from the repository.
-### 2. Install Dependencies
-Ensure you have Python installed, then install the required packages:
+### 1. Clone the repository
 ```
-pip install openai python-dotenv
+git clone https://github.com/your-username/django-todolist.git
+cd django-todolist
 ```
 
-### 3. Set Up the API Key
-Create a .env file in the project directory and add your OpenAI API key:
+### 2. Create and activate a virtual environment
 ```
-api_key=your-api-key
-````
-Replace your-api-key with your actual OpenAI API key.
+python -m venv venv  
+source venv/bin/activate   # On Windows use: venv\Scripts\activate
+```
 
-### 4. Run the application
- ```
-python chatbot.py
- ```
+### 3. Install dependencies
+```
+pip install -r requirements.txt
+```
+
+### 4. Apply database migrations
+```
+python manage.py migrate
+```
+
+### 5. Create a superuser (optional for admin access)
+```
+python manage.py createsuperuser
+```
+
+### 6. Run the development server
+```
+python manage.py runserver
+```
+Then open `http://127.0.0.1:8000/` in your browser.
+
+## Future Improvements
+As this was one of my **basic projects**, there are several things I would love to improve:
+1. **Highlight busy days on the calendar** – Making days with tasks appear **darker** for better visibility.
+2. **Enhanced UI/UX** – Improving the design and adding animations for a smoother experience.
+3. **Task categorization** – Allow users to categorize tasks (e.g., Work, Personal, Urgent, etc.).
+4. **Task reminders** – Add notification support to remind users of pending tasks.
+5. **Drag & Drop task reordering** – Making it easier to manage and prioritize tasks.
+6. **Start and end dates for tasks** – Implementing the ability to set start and end dates for tasks that require multiple days to complete.
+
