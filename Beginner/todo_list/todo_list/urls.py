@@ -5,12 +5,11 @@ from django.conf import settings
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("todo.urls")),  # Fixed empty string for root
-    path("calander/", include("mycalendar.urls")),  # Removed leading slash
-    path("calendar/", include("mycalendar.urls")),  # Removed leading slash
+    path("calander/", include("mycalendar.urls")),  
+    path("calendar/", include("mycalendar.urls")),  
 
 ]
 
-# Debug Toolbar URL Configuration
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns += [path("__debug__/", include(debug_toolbar.urls))]
