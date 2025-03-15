@@ -3,9 +3,6 @@ import datetime
 from calendar import monthrange
 from datetime import date
 
-# 🔹 New helper function that only returns context
-
-
 def get_calendar_context(request):
     # Get year and month from URL parameters, or use the current date
     year = int(request.GET.get('year', datetime.datetime.today().year))
@@ -35,9 +32,6 @@ def get_calendar_context(request):
         "months_list": months_list,
         "years_list": years_list,  # List of years for dropdown
     }
-
-# 🔹 The view function now calls the helper function
-
 
 def mycalendar(request):
     context = get_calendar_context(request)
