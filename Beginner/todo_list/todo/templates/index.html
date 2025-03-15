@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+    />
+
+    <title>{{ name }}'s Todo List</title>
+    <style>
+      .btn-primary {
+        background-color: #c03a11; /* Attractive orange */
+        border: none;
+      }
+      .btn-primary:hover {
+        background-color: #e64a19;
+      }
+      .btn-warning {
+        background-color: #ffb74d;
+        border: none;
+      }
+      .btn-danger {
+        background-color: #d32f2f;
+        border: none;
+      }
+      body {
+        background-color: black;
+        font-family: Arial, sans-serif;
+        color: white;
+        margin: 1vw;
+      }
+      .sidebar,
+      .main-content,
+      .container1 {
+        margin-left: -2vw;
+        padding: 1vw;
+        background-color: rgba(128, 128, 128, 0.37);
+        border-radius: 2vw;
+      }
+      .calendar {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+      }
+      .day {
+        color: black;
+        padding: 0.4vw;
+        text-align: center;
+        border-radius: 5px;
+        background-color: rgb(196, 196, 196);
+      }
+      .has-task {
+        background-color: black;
+      }
+      .today {
+        border: 3px solid rgb(16, 238, 212);
+        padding: 0.1vw;
+      }
+      .list li {
+        background-color: gray;
+        padding: 1vw;
+        border-radius: 0.5vw;
+        margin: 1vw;
+        color: white;
+        font-size: 1.3vw;
+      }
+      .container2 {
+        border-radius: 2vw;
+        background-color: rgba(86, 85, 85, 0.588);
+        padding: 1vw;
+      }
+      .container2 h2 {
+        font-size: 2vw;
+      }
+      .task-card {
+        background: #fffbe6;
+        border-left: 5px solid #ffcc00;
+        border-radius: 12px;
+        padding: 15px;
+        color: black;
+      }
+      .back .a i {
+        padding: 3vw;
+        border-radius: 100%;
+      }
+      .back i {
+        background-color: azure;
+
+        border-radius: 100%;
+
+        color: black;
+      }
+      .back {
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="container1 text-center m-3">
+      <h1>{{name}}'s Todo List</h1>
+    </header>
+
+    <div class="container mt-2 d-flex gap-3">
+      <!-- Left Sidebar: Attractive Date Buttons & Calendar -->
+      <div class="sidebar col-md-3">
+        <ul class="list list-unstyled">
+          <li>
+            <a
+              href="?date={{ yesterday|date:'Y-m-d' }}"
+              class="text-white text-decoration-none"
+            >
+              Yesterday
+            </a>
+          </li>
+          <li>
+            <a
+              href="?date={{ today|date:'Y-m-d' }}"
+              class="text-white text-decoration-none"
+            >
+              Today
+            </a>
+          </li>
+          <li>
+            <a
+              href="?date={{ tomorrow|date:'Y-m-d' }}"
+              class="text-white text-decoration-none"
+            >
+              Tomorrow
+            </a>
+          </li>
+        </ul>
+        <br />
+
+        <h3>Calendar</h3>
+        <h5>{{ month_name }} {{ year }}</h5>
+        <div class="calendar">
+          {% for day in days %} {% if day %}
+          <a
+            href="?date={{ year }}-{{ month }}-{{ day }}"
+            class="text-decoration-none"
+          >
+            <div
+              class="day{% if day == today.day and month == today.month and year == today.year %} today{% endif %}"
+            >
+              {{ day }}
+            </div>
+          </a>
+          {% else %}
+          <div class="day"></div>
+          {% endif %} {% endfor %}
+        </div>
+      </div>
+
+      <!-- Middle: Read-only Task List and Add New Task -->
+      <div class="main-content col-md-4.5 m-1">
+        <div class="container2 mb-3">
+          <h2>Tasks for {{ selected_date }}</h2>
+          <ul class="list list-group">
+            {% for task in tasks %}
+            <li class="list-group-item">
+              <!-- Clicking the task goes to the editing section -->
+              <a
+                href="?date={{ selected_date }}&edit_task={{ task.id }}"
+                class="text-white text-decoration-none"
+              >
+                {{ task.title }}
+              </a>
+            </li>
+            {% empty %}
+            <li class="list-group-item">No tasks for this date</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="back">
+          <span class="p-2">Full Calendar</span>
+
+          <a
+            href="{% url 'calander' %}"
+            class="btn btn-light rounded-circle align-items-center justify-content-center"
+            style="width: 50px; height: 50px"
+          >
+            <i class="bi bi-arrow-right-circle-fill fs-4"></i>
+          </a>
+        </div>
+
+        <div class="container2 mt-4">
+          <h2>Add New Task</h2>
+          <form method="POST" action="?date={{ selected_date }}">
+            {% csrf_token %} {{ form.as_p }}
+            <button
+              type="submit"
+              name="create_task"
+              class="btn btn-primary mt-2"
+            >
+              Add Task
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="list_of_a_day col-md-5 m-1">
+        <div class="container2 mb-3">
+          <h2>Tasks for {{ selected_date }}</h2>
+          <ul class="list list-group">
+            {% for task in tasks %}
+            <li class="list-group-item">
+              <form method="POST" action="?date={{ selected_date }}">
+                {% csrf_token %}
+                <input type="hidden" name="task_id" value="{{ task.id }}" />
+                <div class="mb-2">
+                  <input
+                    type="text"
+                    name="title"
+                    value="{{ task.title }}"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="mb-2">
+                  <textarea name="description" class="form-control" required>
+{{ task.description }}</textarea
+                  >
+                </div>
+                <div class="mb-2">
+                  <input
+                    type="date"
+                    name="due_date"
+                    value="{{ task.due_date }}"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  name="update_task"
+                  class="btn btn-warning btn-sm"
+                >
+                  Update
+                </button>
+                <button
+                  type="submit"
+                  name="delete_task"
+                  class="btn btn-danger btn-sm"
+                >
+                  Delete
+                </button>
+              </form>
+            </li>
+            {% empty %}
+            <li class="list-group-item">No tasks for this date</li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="container2 mt-4">
+          <h2>Add Task For Today</h2>
+          <form method="POST" action="?date={{ selected_date }}">
+            {% csrf_token %} {{ form.as_p }}
+            <button
+              type="submit"
+              name="create_task"
+              class="btn btn-primary mt-2"
+            >
+              Add Task
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

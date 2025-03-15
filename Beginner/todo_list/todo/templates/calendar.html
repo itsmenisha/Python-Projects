@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+    />
+
+    <title>Calendar - {{ month_name }} {{ year }}</title>
+    <style>
+      body {
+        background-color: black;
+        color: white;
+      }
+      .calendar-container {
+        max-width: 600px;
+        margin: auto;
+        background: rgba(128, 128, 128, 0.3);
+        padding: 20px;
+        border-radius: 10px;
+      }
+      .calendar {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+      }
+      .day {
+        padding: 1vw;
+        background: gray;
+        text-align: center;
+        border-radius: 5px;
+      }
+      .has-task {
+        background: black;
+        color: white;
+      }
+      .today {
+        border: 3px solid rgb(16, 238, 212);
+        padding: 0.8vw;
+      }
+      .dropdown-container {
+        margin-bottom: 15px;
+      }
+      .back a i {
+         border-radius: 100%;
+      }
+      .back i {
+        background-color: azure;
+        border-radius: 100%;
+        color: black;
+      }
+    </style>
+  </head>
+  <body class="text-center">
+    <div class="container mt-4">
+      <h1>Calendar</h1>
+      <div class="dropdown-container">
+        <label for="yearDropdown">Year:</label>
+        <select id="yearDropdown" class="form-select d-inline w-auto">
+          {% for y in years_list %}
+            <option value="{{ y }}" {% if y == year %}selected{% endif %}>{{ y }}</option>
+          {% endfor %}
+        </select>
+        <label for="monthDropdown">Month:</label>
+        <select id="monthDropdown" class="form-select d-inline w-auto">
+          {% for m in months_list %}
+            <option value="{{ m.number }}" {% if m.number == month %}selected{% endif %}>{{ m.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="d-flex justify-content-center align-items-center mb-3">
+        <a href="?year={{ year|add:"-1" }}&month={{ month }}" class="btn btn-light me-2">&lt;&lt;</a>
+        {% if month == 1 %}
+          <a href="?year={{ year|add:"-1" }}&month=12" class="btn btn-light me-2">&lt;</a>
+        {% else %}
+          <a href="?year={{ year }}&month={{ month|add:"-1" }}" class="btn btn-light me-2">&lt;</a>
+        {% endif %}
+        <h2 class="mb-0">{{ month_name }} {{ year }}</h2>
+        {% if month == 12 %}
+          <a href="?year={{ year|add:"1" }}&month=1" class="btn btn-light ms-2">&gt;</a>
+        {% else %}
+          <a href="?year={{ year }}&month={{ month|add:"1" }}" class="btn btn-light ms-2">&gt;</a>
+        {% endif %}
+        <a href="?year={{ year|add:"1" }}&month={{ month }}" class="btn btn-light ms-2">&gt;&gt;</a>
+      </div>
+
+      <div class="calendar-container">
+        <div class="calendar">
+          {% for day in days %}
+            {% if day %}
+              <a href="{% url 'index' %}?date={{ year }}-{{ month }}-{{ day }}" class="text-white text-decoration-none">
+                <div class="day {% if day == today.day and month == today.month and year == today.year %} today{% endif %}">
+                  {{ day }}
+                </div>
+              </a>
+            {% else %}
+              <div class="day"></div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <br>
+      <div class="back">
+        <a href="{% url 'index' %}" class="btn btn-light rounded-circle align-items-center justify-content-center" 
+           style="width: 50px; height: 50px;">
+            <i class="bi bi-arrow-left-circle-fill fs-4"></i>
+        </a>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById("yearDropdown").addEventListener("change", function () {
+        var selectedYear = this.value;
+        var selectedMonth = document.getElementById("monthDropdown").value;
+        window.location.href = "?year=" + selectedYear + "&month=" + selectedMonth;
+      });
+
+      document.getElementById("monthDropdown").addEventListener("change", function () {
+        var selectedYear = document.getElementById("yearDropdown").value;
+        var selectedMonth = this.value;
+        window.location.href = "?year=" + selectedYear + "&month=" + selectedMonth;
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
