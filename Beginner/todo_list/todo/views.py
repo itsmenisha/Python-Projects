@@ -27,16 +27,13 @@ def task_list(request, name=None):
     yesterday = today - timedelta(days=1)
     tomorrow = today + timedelta(days=1)
 
-    # Get selected date from query parameters (default to today)
     date_str = request.GET.get("date", today.strftime("%Y-%m-%d"))
     try:
         selected_date = datetime.strptime(date_str, "%Y-%m-%d").date()
     except ValueError:
         selected_date = today
 
-    # Fetch tasks for the selected date
     tasks = Task.objects.filter(due_date=selected_date)
-    # Get all task due dates (for calendar highlighting)
     task_dates = list(Task.objects.values_list("due_date", flat=True))
 
     if request.method == "POST":
