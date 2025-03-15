@@ -4,7 +4,7 @@ from django.conf import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("todo.urls")),  # Fixed empty string for root
+    path("", include("todo.urls")), 
     path("calander/", include("mycalendar.urls")),  
     path("calendar/", include("mycalendar.urls")),  
 
