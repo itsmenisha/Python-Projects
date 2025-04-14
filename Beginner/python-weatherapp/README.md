@@ -1,4 +1,5 @@
 # Weather App
+[![Watch the video](https://img.youtube.com/vi/iHRFc9BVrk4/maxresdefault.jpg)](https://www.youtube.com/watch?v=iHRFc9BVrk4)
 
 This is a weather app I created using Tkinter. It is one of the first projects of this beginner journey I am on. Maybe it's not much, but I learned about how weather APIs work. Along the way, I faced many challenges, but it was a fruitful experience.
 
