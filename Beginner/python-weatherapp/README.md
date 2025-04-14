@@ -1,6 +1,5 @@
 # Weather App
 
-[![Watch the video](https://img.youtube.com/vi/iHRFc9BVrk4/maxresdefault.jpg)](https://www.youtube.com/watch?v=iHRFc9BVrk4)
 
 [![Watch the video](https://img.youtube.com/vi/iHRFc9BVrk4/hqdefault.jpg)](https://www.youtube.com/watch?v=iHRFc9BVrk4)
 
