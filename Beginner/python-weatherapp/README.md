@@ -1,4 +1,9 @@
 # Weather App
+<a href="https://github.com/YourUsername/YourRepoName" target="_blank">
+  <img src="https://img.icons8.com/ios-glyphs/30/000000/github.png" alt="GitHub">
+</a>
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/YourUsername/YourRepoName)
+
 [![Watch the video](https://img.youtube.com/vi/iHRFc9BVrk4/hqdefault.jpg)](https://www.youtube.com/watch?v=iHRFc9BVrk4)
 
 
