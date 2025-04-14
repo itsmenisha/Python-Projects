@@ -1,10 +1,6 @@
 # Weather App
-<iframe width="560" height="315" 
-src="https://www.youtube.com/embed/iHRFc9BVrk4" 
-title="YouTube video player" 
-frameborder="0" 
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
+[![Watch the video](https://img.youtube.com/vi/iHRFc9BVrk4/hqdefault.jpg)](https://www.youtube.com/watch?v=iHRFc9BVrk4)
+
 
 This is a weather app I created using Tkinter. It is one of the first projects of this beginner journey I am on. Maybe it's not much, but I learned about how weather APIs work. Along the way, I faced many challenges, but it was a fruitful experience.
 
